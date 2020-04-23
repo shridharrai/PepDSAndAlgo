@@ -11,6 +11,7 @@ public class KnapSack {
 		end = System.currentTimeMillis();
 		return end - start;
 	}
+	// O(2^n)
 	static int knapsackRec(int[] w, int[] p, int n, int W) {
 		if (n == 0 || W == 0) {
 			return 0;
@@ -24,6 +25,7 @@ public class KnapSack {
 		}
 	}
 	
+	//O(nW)
 	static int knapsackDP(int[] w, int[] p, int n, int W) {
 		int[][] memo = new int[n+1][W+1];
 		

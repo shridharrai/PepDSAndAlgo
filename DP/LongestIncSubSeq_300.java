@@ -51,54 +51,88 @@ public class LongestIncSubSeq_300 {
 		return max;
 	}
 	
-	//In O(nlogn)
-	public static int LISdp(int arr[]) {
-		int increasingsub[] = new int[arr.length];
-		int parent[] = new int[arr.length + 1];
-		int length = 0;
-		
-		for (int i = 0; i < arr.length; i++) {
-			//Binary Search
-			int low = 1;
-			int high = length;
-			while (low <= high) {
-				int mid = (int) Math.ceil((low+high)/2);
-				if (arr[increasingsub[mid]] > arr[i]) {
-					low = mid + 1;
-				} else {
-					high = mid - 1;
-				}
+	//O(nlogn)
+	public static int LISdp(int nums[]) {
+		int lis[] = new int[nums.length];
+		int len;
+		lis[0] = nums[0];
+		len = 1;
+		for (int i = 0; i < nums.length; i++) {
+			if (nums[i] < lis[0]) {
+				lis[0] = nums[i];
 			}
-			int pos = low;
-			parent[i] = increasingsub[pos-1];
-			increasingsub[pos] = i;
-			
-			if (length < pos) {
-				length = pos;
+			else if (nums[i] > lis[len-1]) {
+				len++;
+				lis[len] = nums[i];
+			}
+			else {
+				lis[binarySearch(lis, -1, len - 1, nums[i])] = nums[i];
 			}
 		}
-		
-		//Generate LIS from parent array
-		int LIS[] = new int[length];
-		int k = increasingsub[length];
-		for (int i = length-1; i >= 0; i--) {
-			LIS[i] = arr[k];
-			k = parent[k];
-		}
-		
-		for (int i = 0; i < LIS.length; i++) {
-				System.out.println(LIS[i]);
-		}
-		
-		return length;
+		return len;
 	}
+	//O(logn)
+	static int binarySearch(int A[], int l, int r, int key) 
+    { 
+        while (r - l > 1) { 
+            int m = l + (r - l) / 2; 
+            if (A[m] >= key) 
+                r = m; 
+            else
+                l = m; 
+        } 
+  
+        return r; 
+    } 
+	
+	//In O(nlogn)
+//	public static int LISdp(int arr[]) {
+//		int increasingsub[] = new int[arr.length];
+//		int parent[] = new int[arr.length + 1];
+//		int length = 0;
+//		
+//		for (int i = 0; i < arr.length; i++) {
+//			//Binary Search
+//			int low = 1;
+//			int high = length;
+//			while (low <= high) {
+//				int mid = (int) Math.ceil((low+high)/2);
+//				if (arr[increasingsub[mid]] > arr[i]) {
+//					low = mid + 1;
+//				} else {
+//					high = mid - 1;
+//				}
+//			}
+//			int pos = low;
+//			parent[i] = increasingsub[pos-1];
+//			increasingsub[pos] = i;
+//			
+//			if (length < pos) {
+//				length = pos;
+//			}
+//		}
+//		
+//		//Generate LIS from parent array
+//		int LIS[] = new int[length];
+//		int k = increasingsub[length];
+//		for (int i = length-1; i >= 0; i--) {
+//			LIS[i] = arr[k];
+//			k = parent[k];
+//		}
+//		
+//		for (int i = 0; i < LIS.length; i++) {
+//				System.out.println(LIS[i]);
+//		}
+//		
+//		return length;
+//	}
 	
 	
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 //		int arr[] = { 4, 10, 3, 13, 7, 11, 12 }; 
-		int arr[] = { 4, 3, 2, 1 }; 
+		int arr[] = { 4, 10, 4, 3, 8, 9 }; 
         int n = arr.length; 
         System.out.println("Length of lis is " + LISdp(arr) + "\n" );
         System.out.println("LIS Recursive call length "+ lisRec(arr, 0, n, Integer.MIN_VALUE));

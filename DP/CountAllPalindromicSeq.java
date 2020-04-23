@@ -10,7 +10,7 @@ public class CountAllPalindromicSeq {
 		}
 		
 		if (str.charAt(si) == str.charAt(ei)) {
-			return 1 + countPSRec(str, si + 1, ei) + countPSRec(str, si, ei-1) ;
+			return countPSRec(str, si + 1, ei) + countPSRec(str, si, ei-1) + 1;
 		}
 		
 		else{
@@ -19,7 +19,7 @@ public class CountAllPalindromicSeq {
 		}
 	}
 	
-	//My Soln
+	//My Soln O(n^2)
 	public static int countPSDp(String str) {
 		int n = str.length();
 		int[][] dp = new int[n][n];
