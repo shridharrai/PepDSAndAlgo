@@ -3,7 +3,7 @@ package arraysAndStrings;
 import java.util.ArrayList;
 
 //Segmented Sieves
-public class PrimeGenerator {
+public class PrimeGenerator_Spoj {
 	public static void primes(int m, int n, ArrayList<Integer> sieves) {
 		boolean[] prime = new boolean[(n-m) + 1];
 //		System.out.println(prime.length);

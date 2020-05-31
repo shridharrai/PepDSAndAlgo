@@ -1,6 +1,6 @@
 package arraysAndStrings;
 
-public class ProductOfArrayExceptSelf {
+public class ProductOfArrayExceptSelf_238 {
 	public static int[] productExceptSelf(int[] nums) {
 		int[] ans = new int[nums.length];
 		ans[0] = nums[0];

@@ -1,30 +1,35 @@
 package arraysAndStrings;
 
-public class Segregate0And1 {
+public class Segregate0_1And2_Geeks {
 	//O(n)
 	public static int[] segregate(int[] arr) {
-		int i = 0, j = 0;
-		while (j < arr.length) {
+		int i = 0, j = 0, k = arr.length - 1;
+		while (j <= k) {
 			if (arr[j] == 1) {
 				j++;
 			}
-			else {              //If arr[j] == 0
-				int k = arr[i];
+			else if (arr[j] == 0) {
+				int temp = arr[i];
 				arr[i] = arr[j];
-				arr[j] = k;
+				arr[j] = temp;
 				i++;
 				j++;
+			}
+			else{            //If arr[j] == 2
+				int temp = arr[k];
+				arr[k] = arr[j];
+				arr[j] = temp;
+				k--;
 			}
 		}
 		return arr;
 	}
+	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		int[] arr = {0, 1, 0, 1, 0, 0, 1, 1, 1, 0};
+		int[] arr = {0, 1, 1, 0, 1, 2, 1, 2, 0, 0, 0, 1};
 		int[] ans = segregate(arr);
 		for (int i = 0; i < ans.length; i++) {
 			System.out.print(ans[i] + " ");
 		}
 	}
-
 }

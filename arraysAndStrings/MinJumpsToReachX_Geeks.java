@@ -1,6 +1,6 @@
 package arraysAndStrings;
 
-public class MinJumpsToReachX {
+public class MinJumpsToReachX_Geeks {
 	//O(n)
 	public static int countJumps(int X) {
 		int sum = 0;
@@ -13,13 +13,19 @@ public class MinJumpsToReachX {
 			if (sum == X) {
 				return jump;
 			} else {
+				//If diff between actual target and target we reach is even
 				if ((sum - X)%2 == 0) {
 					return jump;
-				} else {
+				}
+				//If diff is odd then take one more jump
+				else {
 					sum = sum + i;
+					//If now the diff is even after taking one more jump
 					if ((sum - X)%2 == 0) {
 						return jump + 1;
-					} else {
+					}
+					//If again the diff is odd then definitely in next jump it becomes even
+					else {
 						return jump+2;
 					}
 				}
