@@ -1,6 +1,7 @@
 package stackAndQueues;
 
 public class MaximalRectangle_85 {
+	//O(n^2)
 	public static int maximalRectangle(char[][] matrix) {
 		int[] ans = new int[matrix[0].length];
 		int omax = Integer.MIN_VALUE;
@@ -17,7 +18,9 @@ public class MaximalRectangle_85 {
 			for (int k = 0; k < ans.length; k++) {
 				System.out.print(ans[k] + " ");
 			}
+			System.out.println();
 			int max = LargestRectangleInHistogram_84.largestRectangleArea(ans);
+			System.out.println(max);
 			omax = Math.max(omax, max);
 		}
 		System.out.println();
