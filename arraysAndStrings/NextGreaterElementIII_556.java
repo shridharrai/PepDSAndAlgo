@@ -47,7 +47,7 @@ public class NextGreaterElementIII_556 {
 	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		System.out.println("Ele is "+nextGreaterElement(12347653));
+		System.out.println("Ele is "+nextGreaterElement(12));
 	}
 
 }

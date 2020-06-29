@@ -23,7 +23,6 @@ public class RemoveDuplicateLetters_316 {
 			if (!visitedMap.get(s.charAt(i))) {
 				while (!stack.isEmpty() && stack.peek() > s.charAt(i) && freqMap.get(stack.peek()) > 0) {
 					char rem = stack.pop();
-					freqMap.put(rem, freqMap.get(rem)-1);
 					visitedMap.put(rem, false);
 				}
 				stack.push(s.charAt(i));
