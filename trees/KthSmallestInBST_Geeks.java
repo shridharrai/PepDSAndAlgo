@@ -1,10 +1,7 @@
 package trees;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
 
-public class InorderTraversal_94 {
+public class KthSmallestInBST_Geeks {
 	TreeNode root;
 	private static class TreeNode {
 		      int val;
@@ -17,30 +14,19 @@ public class InorderTraversal_94 {
 		      }
 		  }
 	
-	public List<Integer> inorderTraversal(TreeNode root) {
-		//With Stack
-//		ArrayList<Integer> list = new ArrayList<Integer>();
-//		TreeNode curr = root;
-//		Stack<TreeNode> stack = new Stack<TreeNode>();
-//		while (curr != null || stack.size() > 0) {
-//			while (curr != null) {
-//				stack.push(curr);
-//				curr = curr.left;
-//			}
-//			curr = stack.pop();
-//			list.add(curr.val);
-//			curr = curr.right;
-//		}
-//		return list;
-		
-		//Without Stack(O(4n))
-		ArrayList<Integer> list = new ArrayList<Integer>();
-		TreeNode curr = root;
+	public int KthSmallestUsingMorris(TreeNode root, int k) {
+		int count = 0;
+		int ksmall = Integer.MIN_VALUE;
+        TreeNode curr = root;
 		
 		while (curr != null) {
 			//If left child is null then process it
 			if (curr.left == null) {
-				list.add(curr.val);
+				count++;
+				if (count == k) {
+					ksmall = curr.val;
+					break;
+				}
 				curr = curr.right;
 			} else {
 				TreeNode currp1 = curr.left;
@@ -59,22 +45,28 @@ public class InorderTraversal_94 {
 					 * left side is already processed so process this node
 					 * and then traverse to the right side*/ 
 					currp1.right = null;
-					list.add(curr.val);
+					count++;
+					if (count == k) {
+						ksmall = curr.val;
+						break;
+					}
 					curr = curr.right;
 				}
 			}
 		}
-		return list;
+		return ksmall;
 	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		InorderTraversal_94 tree = new InorderTraversal_94();
-		tree.root = new TreeNode(1);
-		tree.root.left = new TreeNode(2);
-		tree.root.right = new TreeNode(3);
+		KthSmallestInBST_Geeks tree = new KthSmallestInBST_Geeks();
+		tree.root = new TreeNode(20);
+		tree.root.left = new TreeNode(8);
+		tree.root.right = new TreeNode(22);
 		tree.root.left.left = new TreeNode(4);
-		tree.root.left.right = new TreeNode(5);
-		System.out.println(tree.inorderTraversal(tree.root));
+		tree.root.left.right = new TreeNode(12);
+		tree.root.left.right.left = new TreeNode(10);
+		tree.root.left.right.right = new TreeNode(14);
+		System.out.println(tree.KthSmallestUsingMorris(tree.root, 3));
 	}
 
 }

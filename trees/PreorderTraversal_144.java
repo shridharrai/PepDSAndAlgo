@@ -2,9 +2,9 @@ package trees;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
 
-public class InorderTraversal_94 {
+
+public class PreorderTraversal_144 {
 	TreeNode root;
 	private static class TreeNode {
 		      int val;
@@ -17,23 +17,7 @@ public class InorderTraversal_94 {
 		      }
 		  }
 	
-	public List<Integer> inorderTraversal(TreeNode root) {
-		//With Stack
-//		ArrayList<Integer> list = new ArrayList<Integer>();
-//		TreeNode curr = root;
-//		Stack<TreeNode> stack = new Stack<TreeNode>();
-//		while (curr != null || stack.size() > 0) {
-//			while (curr != null) {
-//				stack.push(curr);
-//				curr = curr.left;
-//			}
-//			curr = stack.pop();
-//			list.add(curr.val);
-//			curr = curr.right;
-//		}
-//		return list;
-		
-		//Without Stack(O(4n))
+	public List<Integer> preorderTraversal(TreeNode root) {
 		ArrayList<Integer> list = new ArrayList<Integer>();
 		TreeNode curr = root;
 		
@@ -48,18 +32,14 @@ public class InorderTraversal_94 {
 				while (currp1.right != null && currp1.right != curr) {
 					currp1 = currp1.right;
 				}
-				/*If rightmost node is not linked then it means left
-				side is not processed so make a chain for backtracking
-				and process the left side*/
+				
 				if (currp1.right == null) {
+                    list.add(curr.val);
 					currp1.right = curr;
 					curr = curr.left;
 				} else {
-					/*If rightmost node is already linked then it means
-					 * left side is already processed so process this node
-					 * and then traverse to the right side*/ 
+					
 					currp1.right = null;
-					list.add(curr.val);
 					curr = curr.right;
 				}
 			}
@@ -68,13 +48,13 @@ public class InorderTraversal_94 {
 	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		InorderTraversal_94 tree = new InorderTraversal_94();
+		PreorderTraversal_144 tree = new PreorderTraversal_144();
 		tree.root = new TreeNode(1);
 		tree.root.left = new TreeNode(2);
 		tree.root.right = new TreeNode(3);
 		tree.root.left.left = new TreeNode(4);
 		tree.root.left.right = new TreeNode(5);
-		System.out.println(tree.inorderTraversal(tree.root));
+		System.out.println(tree.preorderTraversal(tree.root));
 	}
 
 }
